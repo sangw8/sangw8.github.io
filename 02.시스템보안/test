@@ -1,1 +1,19 @@
+<Unix/Linux>
 
+$디렉터리 및 파일관리$
+#ls -al  --디렉터리 및 파일의 정보를 나열
+#cat /etc/passwd  --파일의 내용을 출력하거나 여러 파일의 내용을 병합
+#ln (-s) [source-file] | source-directory [target file]   --윈도우 바로가기처럼 기존 파일에 대한 또다른 접근 포인트를 만드는 기능. 
+   *(-s) : 심볼릭링크.
+           하드링크(바로가기):파일에만 링크. 기존 파일과 동일한 inode(참조값)을 가짐.  
+           심볼릭링크(복사본):파일or디렉터리에 링크. inode가 아닌 파일 경로를 기반으로 함.
+
+$접근권한$  4754 : 4-Setuid,만약2일경우SetGid,1일경우StickyBit설정 / 7-소유자권한(rwx) / 5-그룹권한(r-x) / 4-others권한(r--)  
+#chmod 4700 /etc/passwd --파일이나 디렉터리의 접근권한을 변경
+#umask 333 /etc/passwd --파일 생성 시 접근권한에 영향을 미침
+#chown root /etc/passwd --파일의 소유주를 변경
+#chgrp tree /etc/passwd --파일의 소유그룹을 변경
+
+$기타$
+#ps -ef |grep vsftpd  --grep:파일 내 특정 패턴이나 문자열을 검색
+#find -mtime 7  --파일을 검색할 때 사용
