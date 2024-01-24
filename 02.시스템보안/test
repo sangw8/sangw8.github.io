@@ -1,19 +1,62 @@
 <Unix/Linux>
 
+#du --하드용량 체크
+#df --파일시스템 용량정보
+#top --CPU사용량
+#ps  --프로세스 정보 표시
+#cd --디렉터리변경
+#cp --파일복사
+#mv --파일이름 또는 위치변경
+    mv index.htm index.html --이름변경
+    mv index.htm ../main/new_file --디렉터리이동
+#mkdir --디렉터리생성
+#rm --파일삭제
+#rmdir --디렉터리삭제
+#pwd --현재디렉터리 경로표시
+#useradd/userdel/groupadd/groupdel --사용자 및 그룹 추가제거
+#cat --파일의 내용을 화면에 출력하거나 만드는 명령 (DOS:TYPE)
+#more --concatenate는 한 화면을 넘기는 파일 내용을 출력 못함.
+#who --현재시스템에 로그인하고 있는 사용자리스트
+#whereis --소스,실행파일,메뉴얼 등의 위치
+#vi,touch,cat --새로운 파일 만들기
+    vi [new file] --vi편집기 상태, 문서작성후 ESC + wq(저장후 빠져나옴) q(빠져나옴)
+    touch [new file] --빈파일만 생성
+    cat > [new file] --vi편집기 상태, 문서작성후 ctrl+D로 빠져나옴.
+#cat,head,tail --파일내용만 보기
+    cat [file name] --파일내용 모두보기
+    head -n [file name] --n줄만큼 위에서부터 보여줌
+    tail -n [file name] --n줄만큼 아래에서부터 보여줌
+
+
 $디렉터리 및 파일관리$
-#ls -al  --디렉터리 및 파일의 정보를 나열
+#ls -al  --디렉터리 및 파일의 정보(리스트)를 나열
 #cat /etc/passwd  --파일의 내용을 출력하거나 여러 파일의 내용을 병합
 #ln (-s) [source-file] | source-directory [target file]   --윈도우 바로가기처럼 기존 파일에 대한 또다른 접근 포인트를 만드는 기능. 
    *(-s) : 심볼릭링크.
            하드링크(바로가기):파일에만 링크. 기존 파일과 동일한 inode(참조값)을 가짐.  
            심볼릭링크(복사본):파일or디렉터리에 링크. inode가 아닌 파일 경로를 기반으로 함.
 
-$접근권한$  4754 : 4-Setuid,만약2일경우SetGid,1일경우StickyBit설정 / 7-소유자권한(rwx) / 5-그룹권한(r-x) / 4-others권한(r--)  
+
+$접근권한$  
+File Permission> 
+
+      d                   rwx                rwx                rwt
+SetUGid/Stickybit | Owner(사용자자신) | Group(그룹사용자) | Others(전체사용자) 
+
+-r-sr-xr-x(4555) root sys /usr/bin/passwd
+-r-xr-sr-x(2555) root mail /usr/bin/mail
+drwxrwxrwt(1777) sys sys /temp
+Setuid(4---) others의 실행권한이 r-x로 실행권한이 있으므로 모든 사용자가 passwd 명령을 실행 시 소유자인 root권한으로 수행
+SetGid(2---) others의 실행권한이 r-x로 실행권한이 있으므로 모든 사용자가 mail 파일 실행시 mail그룹 권한으로 수행
+StickyBit(1---) tmp 디렉터리의 경우 rwt로 해당 디렉터리에 생성된 디렉터리 혹은 파일은 누구든지 읽기/쓰기는 가능하지만 삭제는 소유주와 root만 가능
+
 #chmod 4700 /etc/passwd --파일이나 디렉터리의 접근권한을 변경
-#umask 333 /etc/passwd --파일 생성 시 접근권한에 영향을 미침
+#umask 333 /etc/passwd --파일 생성 시 접근권한에 영향을 미침  (초기 생성시 권한 : 파일:666/디렉터리:777)
 #chown root /etc/passwd --파일의 소유주를 변경
 #chgrp tree /etc/passwd --파일의 소유그룹을 변경
+
 
 $기타$
 #ps -ef |grep vsftpd  --grep:파일 내 특정 패턴이나 문자열을 검색
 #find -mtime 7  --파일을 검색할 때 사용
+
