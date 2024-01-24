@@ -1,4 +1,5 @@
 $Unix,Linux디렉터리$
+
 / --root 디렉터리나 최상위 디렉터리
 /etc --시스템 설정 파일이 저장(TCP/IP네트워크설정파일,사용자계정정보,시스템초기화파일 등)
 /dev --특수파일(장치파일)이 저장. 프린터나 터미널 같은 물리적인 장치를 다루기 위한 특수파일.
@@ -10,8 +11,9 @@ $Unix,Linux디렉터리$
 /home --각 사용자의 홈 디렉터리(작업 디렉터리)가 저장되는 디렉터리
 /tmp --임시파일을 저장. sticky-bit를 이용해 소유권과 접근권한을 설정해야 함
 /var --시스템 로그가 저장
-
+-----------------------------------------------------------------------------------------------------
 $Unix,Linux명령어$
+
 #rlogin --로컬호스트와 remote호스트를 연결하는 명령어
 #ftp --파일을 공유하기 위한 명령어
 #uname --현재시스템의 정보를 출력하는 명령어
@@ -50,26 +52,27 @@ $Unix,Linux명령어$
 #ps -ef |grep vsftpd  --grep명령어:파일 내 특정 패턴이나 문자열을 검색
 #find -mtime 7  --파일을 검색할 때 사용
 #sudo -u algisa /batch/batch.sh --명령어를 실행할 때 algisa의 권한으로 실행. -u 생략시 root권한으로 실행
-
+-----------------------------------------------------------------------------------------------------
 $Unix|Linux 로그파일$
-@utmp 로그파일 / #(U,L)w,who,finger 
-(U)/var/adm/utmpx --현재 사용자 정보를 기록(로그인,로그아웃 등 현재시스템 사용자의 계정정보)
-(L)/var/run/utmp  --현재 사용자 정보를 기록(로그인,로그아웃 등 현재시스템 사용자의 계정정보)
-@wtmp 로그파일 / #(U,L)last
-(U)/var/adm/wtmpx --성공한 로그인(계정들의 로그인,로그아웃에 대한 정보),시스템 부팅정보 등 히스토리를 담음
-(L)/var/log/wtmp --성공한 로그인(계정들의 로그인,로그아웃에 대한 정보),시스템 부팅정보 등 히스토리를 담음
-@lastlog 로그파일 / #(L)lastlog,(U,L)finger
-(U)/var/adm/lastlog --최근에(마지막으로) 성공한 로그인을 기록
-(L)/var/log/lastlog --최근에(마지막으로) 성공한 로그인을 기록
-  ex)#lastlog -u 계정명 -t 일수
-     #ls -al /var/adm/lastlog
-     #finger kiwi88
-#lastb(L) --리눅스 btmp로그파일 내용확인
+
+utmpx,utmp : 현재 사용자 정보를 기록(로그인,로그아웃 등 현재시스템 사용자의 계정정보)
+(U)/var/adm/utmpx #(U)w,who,finger 
+(L)/var/run/utmp #(L)w,who,finger 
+wtmpx,wtmp : 성공한 로그인(계정들의 로그인,로그아웃에 대한 정보),시스템 부팅정보 등 히스토리를 담음
+(U)/var/adm/wtmpx #(U)last
+(L)/var/log/wtmp #(L)last
+lastlog : 최근에(마지막으로) 성공한 로그인을 기록
+(U)/var/adm/lastlog #(U,L)ls -al /var/adm/lastlog + #(U,L)finger kiwi88                  
+(L)/var/log/lastlog #(L)lastlog  ex)#lastlog -u 계정명 -t 일수    
+loginlog/btmp : 5회 이상 실패한 로그인 로그를 기록
+(U)/var/adm/loginlog #(U)ls -al /var/adm/loginlog + #(U)cat /var/admin/loginlog | grep kiwi88  //vi편집기 등을 통해 확인
+(L)/var/log/btmp #(L)lastb
+
 
 history --각계정별로 실행한 명령어에 대한 기록을 저장한 파일
-
-
+-----------------------------------------------------------------------------------------------------
 $디렉터리 및 파일관리$
+
 #ls -al  --디렉터리 및 파일의 정보(리스트)를 나열
 #cat /etc/passwd  --파일의 내용을 출력하거나 여러 파일의 내용을 병합
 #ln (-s) [source-file] | source-directory [target file]   --윈도우 바로가기처럼 기존 파일에 대한 또다른 접근 포인트를 만드는 기능. 
@@ -80,8 +83,9 @@ $디렉터리 및 파일관리$
            심볼릭링크(바로가기):파일or디렉터리에 링크. inode가 아닌 파일 경로를 기반으로 함. 하나의 파일 경로를 기반으로 파일에 접근하는 것.
                            원본파일을 지우면 심볼릭링크는 사용하지 못함
                            ex)ln -s abc.dat abc_s1.dat
+-----------------------------------------------------------------------------------------------------
+$접근권한$ 
 
-$접근권한$  
 File Permission) 
       d                   rwx                rwx                rwt
 SetUGid/Stickybit | Owner(사용자자신) | Group(그룹사용자) | Others(전체사용자) 
@@ -96,8 +100,9 @@ StickyBit(1---) tmp 디렉터리의 경우 rwt로 해당 디렉터리에 생성�
 #umask 333 /etc/passwd --파일 생성 시 접근권한에 영향을 미침  (초기 생성시 권한 : 파일:666/디렉터리:777)
 #chown root /etc/passwd --파일의 소유주를 변경
 #chgrp tree /etc/passwd --파일의 소유그룹을 변경
-
+-----------------------------------------------------------------------------------------------------
 $계정보안$
+
 /etc/passwd 파일)
 계정명 : 패스워드 : UID : GID : 설명 : 홈디렉터리 : 로그인쉘
 *로그인쉘의 경우 로그인이 불필요한 계정에 대해서 악용되지 않도록 쉘을 없애줘야 함. 웹서버의 경우 로그인이 불필요하기 때문에 로그인쉘 경로를 bin/false로 설정.
@@ -110,8 +115,9 @@ $계정보안$
               $ASJDASDONA : 해쉬값(Passwd + Salt + 해쉬함수)
 #pwconv : passwd -> shadow
 #pwunconv : shadow -> passwd
-
+-----------------------------------------------------------------------------------------------------
 $정기적 스케줄러$
+
 crontab파일)
 분 시 일 월 요일 작업   ex) 20 6 * * 1-5 /work/job parma1  --20분 6시 매일 매월 월-금 job을 parma1 인수를 가지고 실행
 crontab파일제어 : crontab파일을 사용자 계정별로 만들어짐
