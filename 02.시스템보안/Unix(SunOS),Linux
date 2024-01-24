@@ -1,0 +1,123 @@
+$Unix,Linux디렉터리$
+/ --root 디렉터리나 최상위 디렉터리
+/etc --시스템 설정 파일이 저장(TCP/IP네트워크설정파일,사용자계정정보,시스템초기화파일 등)
+/dev --특수파일(장치파일)이 저장. 프린터나 터미널 같은 물리적인 장치를 다루기 위한 특수파일.
+       일반적으로 해커들이 백도어나 루트킷을 많이 설치하는 공간으로 침해사고 발생 시 가장 먼저 점검해봐야 할 공간.
+/usr/bin --디폴트사용자명령어 저장. 기본적으로 실행 가능한 파일을 담고있다.(echo,mv,copy,pwd 등)
+/usr/include --C언어 라이브러리 헤더파일이 저장되는 디렉터리
+/usr/lib --C언어 라이브러리가 저장되는 디렉터리
+/usr/sbin --시스템관리 명령어가 저장되는 디렉터리
+/home --각 사용자의 홈 디렉터리(작업 디렉터리)가 저장되는 디렉터리
+/tmp --임시파일을 저장. sticky-bit를 이용해 소유권과 접근권한을 설정해야 함
+/var --시스템 로그가 저장
+
+$Unix,Linux명령어$
+#rlogin --로컬호스트와 remote호스트를 연결하는 명령어
+#ftp --파일을 공유하기 위한 명령어
+#uname --현재시스템의 정보를 출력하는 명령어
+#finger --특정 컴퓨터의 사용자정보를 볼 수 있는 유닉스 명령어
+#chmod/chown/chgrp/umask --접근권한 설정하는 명령어
+#at --수행시간 지정명령어
+#cat --파일을 작성하거나 파일의 내용을 출력하는 명령어
+#cron --일정시간마다 시스템에서 자동으로 특정작업을 실행시키는 데몬
+#ps --시스템에서 상주하는 프로세스(PID)정보를 알려줌
+#du --하드용량 체크
+#df --파일시스템 용량정보
+#top --CPU사용량
+#ps  --프로세스 정보 표시
+#cd --디렉터리변경
+#cp --파일복사
+#mv --파일이름 또는 위치변경
+    mv index.htm index.html --이름변경
+    mv index.htm ../main/new_file --디렉터리이동
+#mkdir --디렉터리생성
+#rm --파일삭제
+#rmdir --디렉터리삭제
+#pwd --현재디렉터리 경로표시
+#useradd/userdel/groupadd/groupdel --사용자 및 그룹 추가제거
+#cat --파일의 내용을 화면에 출력하거나 만드는 명령 (DOS:TYPE)
+#more --concatenate는 한 화면을 넘기는 파일 내용을 출력 못함.
+#who --현재시스템에 로그인하고 있는 사용자리스트
+#whereis --소스,실행파일,메뉴얼 등의 위치
+#vi,touch,cat --새로운 파일 만들기
+    vi [new file] --vi편집기 상태, 문서작성후 ESC + wq(저장후 빠져나옴) q(빠져나옴)
+    touch [new file] --빈파일만 생성
+    cat > [new file] --vi편집기 상태, 문서작성후 ctrl+D로 빠져나옴.
+#cat,head,tail --파일내용만 보기
+    cat [file name] --파일내용 모두보기
+    head -n [file name] --n줄만큼 위에서부터 보여줌
+    tail -n [file name] --n줄만큼 아래에서부터 보여줌
+#ps -ef |grep vsftpd  --grep명령어:파일 내 특정 패턴이나 문자열을 검색
+#find -mtime 7  --파일을 검색할 때 사용
+
+$Unix|Linux 로그파일$
+@utmp로그파일 --#(U,L)w,who,finger 
+(U)/var/adm/utmpx --현재 사용자 정보를 기록(로그인,로그아웃 등 현재시스템 사용자의 계정정보)
+(L)/var/run/utmp  --현재 사용자 정보를 기록(로그인,로그아웃 등 현재시스템 사용자의 계정정보)
+@wtmp로그파일 --#(U,L)last
+(U)/var/adm/wtmpx --성공한 로그인(계정들의 로그인,로그아웃에 대한 정보),시스템 부팅정보 등 히스토리를 담음
+(L)/var/log/wtmp --성공한 로그인(계정들의 로그인,로그아웃에 대한 정보),시스템 부팅정보 등 히스토리를 담음
+#lastlog(L) --lastlog로그파일 내용확인
+#finger(U,L) --lastlog로그파일 내용확인
+(U)/var/adm/lastlog --최근에(마지막으로) 성공한 로그인을 기록
+(L)/var/log/lastlog --최근에(마지막으로) 성공한 로그인을 기록
+  ex)#lastlog -u 계정명 -t 일수
+     #ls -al /var/adm/lastlog
+     #finger kiwi88
+#lastb(L) --리눅스 btmp로그파일 내용확인
+
+history --각계정별로 실행한 명령어에 대한 기록을 저장한 파일
+
+
+$디렉터리 및 파일관리$
+#ls -al  --디렉터리 및 파일의 정보(리스트)를 나열
+#cat /etc/passwd  --파일의 내용을 출력하거나 여러 파일의 내용을 병합
+#ln (-s) [source-file] | source-directory [target file]   --윈도우 바로가기처럼 기존 파일에 대한 또다른 접근 포인트를 만드는 기능. 
+   *(-s) : 심볼릭링크.
+           하드링크(복사본):파일에만 링크. 기존 파일과 동일한 inode(참조값)을 가짐. 1개의 inode(파일ID)에 여러파일을 링크시키는 것.
+                           하나의 파일을 지워도 다른 하드링크 파일에 그 내용이 살아있음
+                           ex)ln abc.dat abc_h1.dat
+           심볼릭링크(바로가기):파일or디렉터리에 링크. inode가 아닌 파일 경로를 기반으로 함. 하나의 파일 경로를 기반으로 파일에 접근하는 것.
+                           원본파일을 지우면 심볼릭링크는 사용하지 못함
+                           ex)ln -s abc.dat abc_s1.dat
+
+$접근권한$  
+File Permission) 
+      d                   rwx                rwx                rwt
+SetUGid/Stickybit | Owner(사용자자신) | Group(그룹사용자) | Others(전체사용자) 
+-r-sr-xr-x(4555) root sys /usr/bin/passwd
+-r-xr-sr-x(2555) root mail /usr/bin/mail
+drwxrwxrwt(1777) sys sys /temp
+Setuid(4---) others의 실행권한이 r-x로 실행권한이 있으므로 모든 사용자가 passwd 명령을 실행 시 소유자인 root권한으로 수행
+SetGid(2---) others의 실행권한이 r-x로 실행권한이 있으므로 모든 사용자가 mail 파일 실행시 mail그룹 권한으로 수행
+StickyBit(1---) tmp 디렉터리의 경우 rwt로 해당 디렉터리에 생성된 디렉터리 혹은 파일은 누구든지 읽기/쓰기는 가능하지만 삭제는 소유주와 root만 가능
+
+#chmod 4700 /etc/passwd --파일이나 디렉터리의 접근권한을 변경
+#umask 333 /etc/passwd --파일 생성 시 접근권한에 영향을 미침  (초기 생성시 권한 : 파일:666/디렉터리:777)
+#chown root /etc/passwd --파일의 소유주를 변경
+#chgrp tree /etc/passwd --파일의 소유그룹을 변경
+
+$계정보안$
+/etc/passwd 파일)
+계정명 : 패스워드 : UID : GID : 설명 : 홈디렉터리 : 로그인쉘
+*로그인쉘의 경우 로그인이 불필요한 계정에 대해서 악용되지 않도록 쉘을 없애줘야 함. 웹서버의 경우 로그인이 불필요하기 때문에 로그인쉘 경로를 bin/false로 설정.
+ ex) apache : x : 48 : 48 : Apache : /var/www : bin/false
+/etc/shadow 파일)
+계정명 : 암호화된 패스워드 : 최근변경일 : 최소사용기간 : 최대사용기간 : 경고일수 : 만료일수 비활성일수 : 만료일
+            ㄴ$1$1ASASDHA$ASJDASDONA
+              $1 : 암호화에 적용된 알고리즘(1:MD5 ,5:SHA-256, 6:SHA-512)
+              $1ASASDHA : Salt값
+              $ASJDASDONA : 해쉬값(Passwd + Salt + 해쉬함수)
+#pwconv : passwd -> shadow
+#pwunconv : shadow -> passwd
+
+$정기적 스케줄러$
+crontab파일)
+분 시 일 월 요일 작업   ex) 20 6 * * 1-5 /work/job parma1  --20분 6시 매일 매월 월-금 job을 parma1 인수를 가지고 실행
+crontab파일제어 : crontab파일을 사용자 계정별로 만들어짐
+                  root는 사용자를 명시적으로 지정하여 다른사용자 crontab 편집가능
+                  일반사용자는 자신의 crontab파일만 편집가능
+crontab명령접근제어 : crontab명령을 수행할 수 있는 사용자를 제한
+                     /etc/cron.allow -> /etc/cron.deny  --allow파일 먼저 검사 후 deny(화이트리스트 먼저 검사 후 블랙리스트 적용)
+
+
