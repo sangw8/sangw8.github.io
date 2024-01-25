@@ -74,7 +74,7 @@ Unix|Linux 로그파일>
     (U/L)로그파일은 ".쉘종류_history" 형식으로 생성되며 #history 명령을 이용할 수 있다.
     ex)ls -al .bash_history + cat .bash_history | head -5 + history | head -5
 - syslog : 시스템에서 발생하는 log 정보로 서비스의 동작과 에러를 확인할 수 있다.
-- sulog(U) : switch user(su) 명령을 사용한 결과를 저장한 파일. SunOS를 포함한 Unix계열에서만 볼 수 있음
+- sulog(U) : switch user(su) 명령을 사용한 결과를 저장한 파일. SunOS(solaris)를 포함한 Unix계열에서만 볼 수 있음. *UNIX(solaris) : SUN(현Oracle)사에서 solaris라는 운영체제를 만들어 SUN사에서 출시한 서버나 워크스테이션에 기본 장착되는 OS
    (U)/var/adm/sulog #ls -al /var/adm/sulog + #cat /var/adm/sulog | tail -5
     * +기호는 su 명령이 성공했음을 의미, -는 su명령이 실패했음을 의미
 - secure(L) : 사용자/그룹생성/삭제/로그인 등의 사용자 인증에 대한 내역을 기록. Unix-sulog에 담긴 su명령을 사용한 결과가 남음.
