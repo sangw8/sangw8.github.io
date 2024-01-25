@@ -61,25 +61,26 @@ $Unix|Linux 로그파일$
 - wtmpx|wtmp : 성공한 로그인(계정들의 로그인,로그아웃에 대한 정보),시스템 부팅정보 등 히스토리를 담음
    (U)/var/adm/wtmpx #last
    (L)/var/log/wtmp #last
-- lastlog|lastlog : 최근에(마지막으로) 성공한 로그인을 기록
-   (U)/var/adm/lastlog #(U/L)ls -al /var/adm/lastlog + #(U,L)finger kiwi88                  
-   (L)/var/log/lastlog #(L)lastlog  ex)#lastlog -u 계정명 -t 일수    
 - loginlog|btmp : 5회 이상 실패한 로그인 로그를 기록
    (U)/var/adm/loginlog #ls -al /var/adm/loginlog + #cat /var/admin/loginlog | grep kiwi88    //vi편집기 등을 통해 확인
    (L)/var/log/btmp #lastb
-- acct/pacct|acct/pacct : 시스템에 로그인한 모든 사용자가 로그아웃할 때까지 입력한 명령과 시간, 작동된 tty등에 대한 정보 기록
+- lastlog : 최근에(마지막으로) 성공한 로그인을 기록
+   (U)/var/adm/lastlog #(U/L)ls -al /var/adm/lastlog + #(U,L)finger kiwi88                  
+   (L)/var/log/lastlog #(L)lastlog  ex)#lastlog -u 계정명 -t 일수    
+- acct/pacct : 시스템에 로그인한 모든 사용자가 로그아웃할 때까지 입력한 명령과 시간, 작동된 tty등에 대한 정보 기록
    (U)/var/adm/pacct  #lastcomm [계정명]             //기본생성되는 로그파일이 아니므로 /usr/lib/acct/accton /var/adm/pacct 명령 실행 필요
    (L)/var/account/pacct  #lastcomm [계정명]         //기본생성되는 로그파일이 아니므로 accton /var/account/pacct 명령 실행 필요
+- history : 각 계정별로 실행한 명령어에 대한 기록을 저장한 파일
+    (U/L)로그파일은 ".쉘종류_history" 형식으로 생성되며 #history 명령을 이용할 수 있다.
+    ex)ls -al .bash_history + cat .bash_history | head -5 + history | head -5
+- syslog : 시스템에서 발생하는 log 정보로 서비스의 동작과 에러를 확인할 수 있다.
 - sulog(U) : switch user(su) 명령을 사용한 결과를 저장한 파일. SunOS를 포함한 Unix계열에서만 볼 수 있음
    (U)/var/adm/sulog #ls -al /var/adm/sulog + #cat /var/adm/sulog | tail -5
     * +기호는 su 명령이 성공했음을 의미, -는 su명령이 실패했음을 의미
-- secure : 사용자/그룹생성/삭제/로그인 등의 사용자 인증에 대한 내역을 기록. Unix-sulog에 담긴 su명령을 사용한 결과가 남음
+- secure(L) : 사용자/그룹생성/삭제/로그인 등의 사용자 인증에 대한 내역을 기록. Unix-sulog에 담긴 su명령을 사용한 결과가 남음. telnet,ftp,pop,smtp,ssh 접속에 대한 로그인 인증내역을 기록. 인터넷 슈퍼데몬인 inetd 데몬에 의해서 생성되고 기록되는 로그파일
    (L)/var/log/secure
-- history : 각계정별로 실행한 명령어에 대한 기록을 저장한 파일
-    (U/L)로그파일은 ".쉘종류_history" 형식으로 생성되며 #history 명령을 이용할 수 있다.
-    ex)ls -al .bash_history
-       cat .bash_history | head -5
-       history | head -5
+- messages(L) : 리눅스 시스템의 가장 기본적인 시스템 로그파일. 주로 시스템 데몬들의 실행상황과 내역, 사용자들의 접속정보, TCP Wrapper 접근 제어 정보 등을 저장
+               *daemon : 기억장치에 상주하는 프로세스(프로그램). 후선(background)상태로 동작. ex)httpd,sshd,mysqld 등
 -----------------------------------------------------------------------------------------------------
 $디렉터리 및 파일관리$
 
