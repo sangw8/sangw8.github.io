@@ -55,22 +55,24 @@ $Unix,Linux명령어$
 -----------------------------------------------------------------------------------------------------
 $Unix|Linux 로그파일$
 
-- utmpx/utmp : 현재 사용자 정보를 기록(로그인,로그아웃 등 현재시스템 사용자의 계정정보)
+- utmpx|utmp : 현재 사용자 정보를 기록(로그인,로그아웃 등 현재시스템 사용자의 계정정보)
    (U)/var/adm/utmpx #(U)w,who,finger 
    (L)/var/run/utmp #(L)w,who,finger 
-- wtmpx/wtmp : 성공한 로그인(계정들의 로그인,로그아웃에 대한 정보),시스템 부팅정보 등 히스토리를 담음
+- wtmpx|wtmp : 성공한 로그인(계정들의 로그인,로그아웃에 대한 정보),시스템 부팅정보 등 히스토리를 담음
    (U)/var/adm/wtmpx #(U)last
    (L)/var/log/wtmp #(L)last
-- lastlog/lastlog : 최근에(마지막으로) 성공한 로그인을 기록
+- lastlog|lastlog : 최근에(마지막으로) 성공한 로그인을 기록
    (U)/var/adm/lastlog #(U,L)ls -al /var/adm/lastlog + #(U,L)finger kiwi88                  
    (L)/var/log/lastlog #(L)lastlog  ex)#lastlog -u 계정명 -t 일수    
-- loginlog/btmp : 5회 이상 실패한 로그인 로그를 기록
-   (U)/var/adm/loginlog #(U)ls -al /var/adm/loginlog + #(U)cat /var/admin/loginlog | grep kiwi88  //vi편집기 등을 통해 확인
+- loginlog|btmp : 5회 이상 실패한 로그인 로그를 기록
+   (U)/var/adm/loginlog #(U)ls -al /var/adm/loginlog + #(U)cat /var/admin/loginlog | grep kiwi88    //vi편집기 등을 통해 확인
    (L)/var/log/btmp #(L)lastb
+- acct/pacct|acct/pacct : 시스템에 로그인한 모든 사용자가 로그아웃할 때까지 입력한 명령과 시간, 작동된 tty등에 대한 정보 기록
+   (U)/var/adm/pacct  #lastcomm [계정명]             //기본생성되는 로그파일이 아니므로 /usr/lib/acct/accton /var/adm/pacct 명령 실행 필요
+   (L)/var/account/pacct  #lastcomm [계정명]         //기본생성되는 로그파일이 아니므로 accton /var/account/pacct 명령 실행 필요
+- sulog(U) : switch user(su) 명령을 사용한 결과를 저장한 파일. SunOS를 포함한 Unix계열에서만 볼 수 있음
+   (U)/var/adm/sulog
 
-
-
-- sulog(U) : switch user(su) 명령을 사용한 결과를 저장한 파일
 - acct,pacct/acct,pacct : 시스템에 로그인한 모든 사용자가 로그아웃할 때까지 입력한 명령과 시간, 작동된 tty등에 대한 정보 기록
 - history --각계정별로 실행한 명령어에 대한 기록을 저장한 파일
 -----------------------------------------------------------------------------------------------------
