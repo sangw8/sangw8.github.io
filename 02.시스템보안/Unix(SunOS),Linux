@@ -77,7 +77,8 @@ Unix|Linux 로그파일>
 - sulog(U) : switch user(su) 명령을 사용한 결과를 저장한 파일. SunOS를 포함한 Unix계열에서만 볼 수 있음
    (U)/var/adm/sulog #ls -al /var/adm/sulog + #cat /var/adm/sulog | tail -5
     * +기호는 su 명령이 성공했음을 의미, -는 su명령이 실패했음을 의미
-- secure(L) : 사용자/그룹생성/삭제/로그인 등의 사용자 인증에 대한 내역을 기록. Unix-sulog에 담긴 su명령을 사용한 결과가 남음. telnet,ftp,pop,smtp,ssh 접속에 대한 로그인 인증내역을 기록. 인터넷 슈퍼데몬인 inetd 데몬에 의해서 생성되고 기록되는 로그파일
+- secure(L) : 사용자/그룹생성/삭제/로그인 등의 사용자 인증에 대한 내역을 기록. Unix-sulog에 담긴 su명령을 사용한 결과가 남음.
+              telnet,ftp,pop,smtp,ssh 접속에 대한 로그인 인증내역을 기록. 인터넷 슈퍼데몬인 inetd 데몬에 의해서 생성되고 기록되는 로그파일
    (L)/var/log/secure
 - messages(L) : 리눅스 시스템의 가장 기본적인 시스템 로그파일. 주로 시스템 데몬들의 실행상황과 내역, 사용자들의 접속정보, TCP Wrapper 접근 제어 정보 등을 저장
                *daemon : 기억장치에 상주하는 프로세스(프로그램). 후선(background)상태로 동작. ex)httpd,sshd,mysqld 등
