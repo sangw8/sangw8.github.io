@@ -1,10 +1,44 @@
 [UNIX/Linux]
 계정관리>
 1)root 이외에 UID가 0 금지
+  /etc/passwd 파일 내 UID확인(root이외의 계정이 UID=0인 경우 0이 아닌 UID를 부여하거나 불필요한 경우 해당 계정을 삭제함)  --cat /etc/passwd | egrep "^root|^algsia"
+  SOLARIS,LINUX,HP-UX) 
+    usermod -u 2016 algisa //UID값 솔라리스,HP-UX의 경우 100이상 Linux의 경우 500이상
+  AIX)
+    chuser id=2016 algisa //UID값 100이상 설정
 2)패스워드 복잡성 설정
+    영문,숫자,특수문자를 조합하여 계정명과 상이한 8자 이상의 패스워드 설정
+    2종류 이상 조합시 최소 10자리 이상 또는 3종류 이상 조합시 최소 8자리 이상의 길이로 구성
+    시스템마다 상이한 패스워드를 사용하고 패스워드를 기록할 경우에는 변형하여 기록
+    가급적 자주 패스워드를 변경
 3)패스워드 최소길이 설정
+ 패스워드 무차별공격(Brute Force Attack)이나 패스워드추측공격(Password Guessing)에 대응
+    1)Solaris : #cat /etc/default/passwd
+                PASSLENGTH=8
+    2)Linux  : #cat /etc/login.defs
+                PASS_MIN_LEN 8
+    3)AIX    : #cat /etc/security/user
+                minlen=8
+    4)HP-UX  : #cat /etc/default/security
+                MIN_PASSWORD_LENGTH=8
 4)패스워드 최대 사용기간 설정
+    1)Solaris : #cat /etc/default/passwd
+                MAXWEEKS=12
+    2)Linux  : #cat /etc/login.defs
+                PASS_MAX_DAYS 90
+    3)AIX    : #cat /etc/security/user
+                maxage=12
+    4)HP-UX  : #cat /etc/default/security
+                PASSWORD_MAXDAYS=90
 5)패스워드 최소 사용기간 설정
+    1)Solaris : #cat /etc/default/passwd
+                MINWEEKS=1
+    2)Linux  : #cat /etc/login.defs
+                PASS_MIN_DAYS 1
+    3)AIX    : #cat /etc/security/user
+                minage=1
+    4)HP-UX  : #cat /etc/default/security
+                PASSWORD_MINDAYS=1
 6)패스워드 파일보호
 7)Session Timeout설정
 
