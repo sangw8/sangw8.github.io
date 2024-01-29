@@ -12,41 +12,59 @@
     시스템마다 상이한 패스워드를 사용하고 패스워드를 기록할 경우에는 변형하여 기록
     가급적 자주 패스워드를 변경
 3)패스워드 최소길이 설정
- 패스워드 무차별공격(Brute Force Attack)이나 패스워드추측공격(Password Guessing)에 대응
-    1)Solaris : #cat /etc/default/passwd
+   *패스워드 무차별공격(Brute Force Attack)이나 패스워드추측공격(Password Guessing)에 대응
+    (1)Solaris : #cat /etc/default/passwd
                 PASSLENGTH=8
-    2)Linux  : #cat /etc/login.defs
+    (2)Linux  : #cat /etc/login.defs
                 PASS_MIN_LEN 8
-    3)AIX    : #cat /etc/security/user
+    (3)AIX    : #cat /etc/security/user
                 minlen=8
-    4)HP-UX  : #cat /etc/default/security
+    (4)HP-UX  : #cat /etc/default/security
                 MIN_PASSWORD_LENGTH=8
 4)패스워드 최대 사용기간 설정
-    1)Solaris : #cat /etc/default/passwd
+    (1)Solaris : #cat /etc/default/passwd
                 MAXWEEKS=12
-    2)Linux  : #cat /etc/login.defs
+    (2)Linux  : #cat /etc/login.defs
                 PASS_MAX_DAYS 90
-    3)AIX    : #cat /etc/security/user
+    (3)AIX    : #cat /etc/security/user
                 maxage=12
-    4)HP-UX  : #cat /etc/default/security
+    (4)HP-UX  : #cat /etc/default/security
                 PASSWORD_MAXDAYS=90
 5)패스워드 최소 사용기간 설정
-    1)Solaris : #cat /etc/default/passwd
+    (1)Solaris : #cat /etc/default/passwd
                 MINWEEKS=1
-    2)Linux  : #cat /etc/login.defs
+    (2)Linux  : #cat /etc/login.defs
                 PASS_MIN_DAYS 1
-    3)AIX    : #cat /etc/security/user
+    (3)AIX    : #cat /etc/security/user
                 minage=1
-    4)HP-UX  : #cat /etc/default/security
+    (4)HP-UX  : #cat /etc/default/security
                 PASSWORD_MINDAYS=1
 6)패스워드 파일보호
+  shadow 패스워드를 이용하여 권한이 있는 사용자들만 읽을 수 있도록 제한
 7)Session Timeout설정
+    Solaris,Linux,AIX,HP-UX) 
+       <sh,ksh,bash 사용 시>
+       #cat /etc/profile(.profile)
+       TMOUT=600
+       export TMOUT
+       <csh 사용 시>
+       #cat /etc/csh.login 또는 cat /etc/csh.cshrc
+       set autologout=10
 
 파일 및 디렉터리 관리>
-1)root홈, 패스디렉터리 권한 및 패스 설정
+1)root홈, PATH디렉터리 권한 및 경로 설정
 2)파일 및 디렉터리 소유자/소유그룹 설정
 3)world writable파일 점검
 4)주요파일 소유자 및 권한 설정
+     (1)/etc/passwd파일 : 사용자 정보를 담고 있는 파일로 root 소유의 644 이하의 권한을 설정
+     (2)/etc/shadow파일 : 사용자의 암호화된 패스워드 정보를 담고 있는 파일로 root 이외에는 접근 못하도록 root 소유의 400 이하의 권한을 설정
+     (3)/etc/hosts파일 : IP와 호스트 이름을 매핑하는데 사용되는 파일로 외부의 불법접근에 의해 조작 시 악의적인 시스템에 접근할 가능성이 있으므로 root 소유의 600 이하의 권한을 설정
+     (4)/etc/xinetd.conf : inetd 데몬에 대한 설정파일로 외부의 불법적인 접근에 의해 악의적인 프로그램을 등록하고 root 권한으로 실행할 가능성이 있으므로 root 소유의 600 이하의 권한을 설정
+     (5)/etc/syslog.conf : syslogd 데몬에 대한 설정파일로 주요 로그파일에 대한 설정 정보를 가지고 있다. root이외 사용자는 변경할 수 없도록 root 소유의 644 이하의 권한을 설정
+     (6)/etc/services : 서비스관리(서비스별 포트/프로토콜 정보) 정보를 담고있는 파일로 root 소유의 644 이하의 권한을 설정
+
+
+
 
 [Window]
 계정관리>
