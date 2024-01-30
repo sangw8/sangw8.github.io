@@ -76,7 +76,7 @@ Disallow: /      모든 폴더 검색을 차단하고
 Allow : /$       차단하지만 모든 폴더의 첫번째 페이지는 검색 허용
 검색엔진로봇(crawler) 구글:Googlebot / 네이버:Yeti / Bing:Bingbot / Yahoo:Slurp
 Google : https://www.google.co.kr/robots.txt     --robots.txt 파일은 웹서버 폴더 중 최상위 root 디렉터리(페이지)에 저장해야 함. 그래야 로봇이 확인가능. 
-     *네이버 검색엔진로봇 특징
+     *네이버 검색엔진로봇 특징 (Creator Rank알고리즘 & Deep Intent Analysis알고리즘)
       첫 번째는 언어처리 능력의 차이이다. 네이버의 경우 '개똥부스러기까먹헛소리쟁이'라는 복합명사이자 
      신조어인 검색어를 검색하면 아무 결과를 보여주지 않지만 구글은 복합명사를 분해하여 '개똥'이라는 
      단어가 있는 문서도 보여주고 접미사 '쟁이'도 이해하여 관련 단어가 있는 문서를 보여준다.
