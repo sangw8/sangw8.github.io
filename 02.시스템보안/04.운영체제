@@ -51,6 +51,9 @@
      cf)하드웨어 구성                                                                          <Store<                  /
       [보조기억장치 : 프로그램이 깔려있음 (HDD/SSD)]  >Read/Load> [주기억장치   : 프로그램을 실행] >Load> [캐시메모리] <> [레지스터][CPU(프로세서) : 중앙처리장치]
                                                    <Store/Save<                                                                   제어, 연산, 기억         
+  - 유닉스(Solaris) 커널 보안설정 : 커널 컴파일용도(ndd)(리눅스 sysctl명령과 유사)
+    ndd -set /dev/ip ip_forward_directed_broadcasts 0    --Smurf공격에 대응하기 위한 커널 파라미터설정 > Directed broadcast IP패킷이 포워딩 되는것을 허용하지 않는다
+    ndd -set /dev/tcp tcp_conn_req_max_q0 1024           --TCP SYN Flooding공격에 대응하기 위한 파라미터설정 > TCP연결요청대기큐(Backlog Queue)의 크기를 1024로 늘린다
 
 시분할 시스템>
   Time Sharing System. 여러 명의 사용자가 사용하는 시스템에서 컴퓨터가 사용자들의 프로그램들을 번갈아가며 처리
