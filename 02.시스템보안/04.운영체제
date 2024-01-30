@@ -22,8 +22,20 @@
    3)선점스케줄링vs비선점스케줄링
      (1)선점스케줄링 : 한 프로세스가 CPU를 차지하고 있을 때 다른 프로세스가 현재 프로세스를 중단시키고 자신이 CPU를 차지할 수 있는 기법
                        RR(Round-Robin),SRT(Shortest-Remaining-Time),MLQ(Multi Level Queue),MFQ(Multilevel Feedback Queue)
-     (2)비선점스케줄링 : 
-
+                      높은 우선순위를 가진 프로세스들이 빠른 처리를 요구하는 시스템에 유용
+                       *비교적 빠른응답/대화식 시분할시스템에 적합, 높은 우선순위 프로세스들이 들어오는 경우 오버헤드 초래
+          SRT         :
+          RR          :
+          MLQ         :
+          MFQ         :  
+     (2)비선점스케줄링 : 한 프로세스가 CPU를 할당받으면 다른 프로세스는 CPU를 그 프로세스로부터 뺏을 수 없는 기법
+                       FCFS(FirstComeFirstService),SJF(Shortest-Job-First),HRN(Highest Response-ratio Next),기한부, 우선순위
+                       *응답시간 예상이 용이/모든 프로세스에 대한 요구를 공정하게 처리, 짧은 작업을 수행하는 프로세스가 긴 작업종료시까지 대기
+          FIFO(FCFS) : Fist in First Out 스케줄링은 프로세스들이 대기큐(Ready Queue)에 도착한 순서에 따라 CPU를 할당받음
+          SJF        : 최단 작업 우선 수행방식 (기아현상 발생)
+          HRN        : 우선순위를 계산하여 그 숫자가 가장 높은 것부터 낮은 순으로 우선순위를 부여
+          기한부      : 프로세스에게 일정한 시간을 주어 그 시간안에 프로세스를 완료하도록 하는 기법
+          우선순위    : Priority. 각 프로세스에게 우선순위를 부여하여 순위가 높은 순서대로 처리하는 방법. 선점/비선점 스케줄링 모두 가능 (기아현상 발생)
 
 커널(Kernel)
   - OS(Operating System)의 일부분으로 운영체제의 핵심 기능 담당
