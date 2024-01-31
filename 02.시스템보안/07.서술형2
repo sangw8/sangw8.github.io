@@ -6,3 +6,13 @@ Set-Cookie: ID=KISA; Path=/; secure
  전송하지 않도록 하여 쿠키정보의 기밀성을 보장할 수 있음. 이를 통해 Network Sniffing을 통해 평문 쿠키 정보를 탈취하는 형태의 공격에 대응가능
 Set-Cookie: ID=KISA; Path=/; HttpOnly
 -쿠키에 HttpOnly속성을 설정할 경우 클라이언트(웹브라우저 등)에서 스크립트(자바스크립트 등)을 통한 쿠키 접근을 차단하여 악의적인 쿠키정보 탈취를 방지
+
+HAL(Hardware Abstraction Layer)
+하드웨어와 개발된 소프트웨어 간에 원활한 통신이 가능하도록 도와주는 번역자 역할을 하며 윈도우 시스템에서 다양한 하드웨어를 쉽게 추가
+
+NTFS(New Technology File System)
+윈도우NT 기반 시스템의 표준 파일 시스템, MS사에 의해 개발
+대용량을 지원(볼륨당 권장크기 2TB지만 그 이상 파일도 만들 수 있음)
+암호화 파일 시스템(Encrypting File System)을 지원하고 파일과 폴더의 투명한 암호화 지원
+FAT12/FAT16/FAT32/NTFS  : 윈도우 하드디스크 포맷 형식
+
