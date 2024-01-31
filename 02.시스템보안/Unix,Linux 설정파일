@@ -1,0 +1,37 @@
+●xinetd
+다른 데몬의 실행을 관장하는 슈퍼데몬
+과거 슈퍼데몬으로 사용되었던 inetd를 대체하기 위해 등장
+<xinetd.conf>
+defaults
+{
+# disabled =
+ log_type = SYSLOG daemon info                     --SYSLOG/FILE : 로그기록을 syslog에 위임할지, 별도 파일로 지정할지 선택 FILE /var/logs/xinet.log
+ log_on_failure = HOST                             --HOST,USERID,ATTEMPT : 접속 실패시 기록될 속성값
+ log_on_success = PID HOST DURATION EXIT           --PID,HOST,USERID,EXIT,DURATION,TRAFFINC : 접속 성공 시 기록될 속성값을 지정
+ cps = 50 10                                       -- cps [초당 요청수 50] [제한시간(초) 10] : 초당 요청수가 50 이상이면 10초간 접속 제한
+ instances = 50                                    -- instances = 50 : 동시 서비스할 수 있는 최대 개수를 지정
+ per_source = 10                                   -- per_source = 10 : 같은 IP주소로 접속할 수 있는 서비스 수를 지정
+ v6only = no
+ groups = yes
+ umask = 002
+}
++
+ enabled telnet ftp : 사용가능한 항목을 설정(disabled항목에서 yes라고 설정되어 있어도 허용)
+ no_access : 서비스를 이용할 수 없는 원격 호스트의 주소를 지정
+ access_times : 지정된 시간에만 서비스를 이용할 수 있게 함
+ nice : 서버의 우선순위 지정 -20~19 사이의 정수
+
+●logrotate.conf(/etc/logrotate.conf)
+시스템에서 사용하는 로그들이 무한정 쌓이지 않도록 순환 시키는 기능을 하는 설정 파일
+
+wtmp로그에 대해 로그파일을 압축하고 주 단위로 새로 생성하고자 할 때>
+compress
+/var/log/wtmp {
+   weekly
+   create 0664 root utmp
+       minsize 1M
+   rotate 1
+}
+
+●login.defs(/etc/login.defs)
+각 계정의 UID,GID,패스워드 정책 등을 설정할 수 있는 config 파일
