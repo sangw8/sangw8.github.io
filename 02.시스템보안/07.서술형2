@@ -16,3 +16,12 @@ NTFS(New Technology File System)
 암호화 파일 시스템(Encrypting File System)을 지원하고 파일과 폴더의 투명한 암호화 지원
 FAT12/FAT16/FAT32/NTFS  : 윈도우 하드디스크 포맷 형식
 
+레지스트리(regedit)
+윈도우 시스템에서 사용하는 시스템 구성정보를 저장한 DB
+프로세서의 종류, 주기억장치의 용량, 접속된 주변장치의 정보, 시스템 매개변수, 응용소프트웨어에서 취급하는 파일타입과 매개변수 등이 기억
+regedt32/regedit을 실행하면 보안을 선택하여 설정가능
+HKEY_CLASSES_ROOT(HKCR) : 시스템에 등록된 파일 확장자에 대한 정보 와 그것을 열때 사용할 애플리케이션에 대한 맵핑 정보(바로가기 관련키 : TXT > 메모장설정)
+HKEY_CURRENT_USER(HKCU) : 현재 로그인한 사용자의 설정과 관련된 시스템 정보 저장
+HKEY_LOCAL_MACHINE(HKLM) : 컴퓨터의 모든 사용자의 설정을 담고 있음
+HKEY_USERS(HKU) : CURRENT_USER키에 일치하는 서브키. 시스템에 있는 모든 계정과 그룹에 관한 정보를 저장.(한 PC를 4명이 각기 다른 계정으로 사용중 이라면 HKU는 4명의 정보를 가짐)
+HKEY_CURRENT_CONFIG(HKCC) : 시스템이 시작할 때 사용하는 하드웨어 프로파일 정보를 저장
