@@ -36,12 +36,12 @@ compress
 ●login.defs(/etc/login.defs)
 각 계정의 UID,GID,패스워드 정책 등을 설정할 수 있는 config 파일
 
-●PAM(Pluggable Authentication Module) - pam.d
+●PAM(Pluggable Authentication Module) (/etc/pam.d/system-auth)
 리눅스 계정 관리 모듈(계정 임계값 설정)
 리눅스에서 플러그인 방식으로 적용할 수 있는 인증 모듈
 인증 모듈을 별도로 개발하지 않고 공유 라이브러리 형태로 적용
 관리자가 인증을 중앙에서 통제
-<계정관리 구성요소>
+<계정관리 구성요소> system-auth
 deny=n --5회 로그인 실패시 접근차단
 unlock_time=n --계정잠금 후 n초후 잠금해제
 no_magic_root --root로부터의 접근을 거부
@@ -53,6 +53,8 @@ reset --인증에 성공할 경우 카운트를 0으로 초기화
 PAM모듈은 성공 또는 실패 상태를 반환(Return)
 스택은 계속해서 순서대로 확인되며, 실패상태를 반환한다해서 중단되지 않음
 모든 PAM모듈의 상태 결과가 종합되어 전체 인증과정의 성공 또는 실패상태를 반환
+
+
 
 ●crontab
 리눅스에서 정해진 시간에 작업이 실행되도록 스케줄링하는 유틸리티 프로그램
