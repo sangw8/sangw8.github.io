@@ -1,3 +1,12 @@
+쿠키(Cookie)
+사용자가 웹서버에 접속하여 로그인하면 생성되는 정보를 사용자의 컴퓨터에 저장해 놓았다가 다음에 다시 접속했을 때는 별도의 로그인 절차 없이 사이트에 빠르게 접속할 수 있게 함
+개별 클라이언트 상태정보를 HTTP 요청/응답 헤더에 담아서 전달하는 작은 정보 또는 데이터를 의미함
+Set-Cookie: ID=KISA; Path=/; secure
+-쿠키에 Secure속성을 설정할 경우 클라이언트(웹브라우저 등)에서 HTTPS통신(암호화통신)일 경우에만 해당 쿠키를 전송하고 HTTP통신(평문통신)일 경우에는
+ 전송하지 않도록 하여 쿠키정보의 기밀성을 보장할 수 있음. 이를 통해 Network Sniffing을 통해 평문 쿠키 정보를 탈취하는 형태의 공격에 대응가능
+Set-Cookie: ID=KISA; Path=/; HttpOnly
+-쿠키에 HttpOnly속성을 설정할 경우 클라이언트(웹브라우저 등)에서 스크립트(자바스크립트 등)을 통한 쿠키 접근을 차단하여 악의적인 쿠키정보 탈취를 방지
+
 XXE(XML eXternal Entity) Injection>
 [코드 1]
 ＜?xml version="1.0"?＞
@@ -88,3 +97,26 @@ tar -cvzf /data/backup/home_$dat.tgz /home/*
 operater사용자만 백업용 쉘 스크립트파일(/usr/local/bin/backup.sh)을 사용하도록 만드는 명령어 :
  $chown operator /usr/local/bin/backup.sh  --쉘스크립트 파일의 소유자를 operator로 변경
  $chmod 700 /usr/local/bin/backup.sh       --쉘스크립트 파일의 접근권한을 소유자만 접근가능하도록 700으로 변경
+
+DNS Amplification Attack
+[로그]
+DNS standard query 0x2872 ANY cpsc.gov United states Korea, Republic of
+DNS standard query 0x2872 ANY cpsc.gov United states Korea, Republic of
+DNS standard query 0x2872 ANY cpsc.gov United states Korea, Republic of
+DNS standard query 0x2872 ANY cpsc.gov United states Korea, Republic of
+DNS Amplification Attack(DNS 증폭 반사 디도스 공격)
+판단이유 : DNS 질의(Query) 수행 시 ANY 타입으로 질의를 다수 수행/TXT타입의 response를 다량 수행
+원리 : 출발지IP를 공격대상서버의 IP로 위조 후(IP spoofing) DNS쿼리타입을 ANY(=all)로 지정하여 request를 대량 수행하면,
+      다양한 TYPE의 레코드들이 모두 Response 되므로 응답이 증폭되어 공격 대상 서버에 부하를 주게됨
+      *ANY : 하나의 응답으로 IPv4,IPv6,메일서버주소,네임서버주소. 즉 하나의 요구로 여러개의 응답을 요구. 90byte질의/3370byte응답--약 37.4배 증폭)
+사용목적 :
+출발지IP위조되고 반사서버를 통해 공격이 수행(DRDoS)되므로 공격의 출처를 파악하기 어려움
+UDP프로토콜의 신속성, 대량성. UDP는 별도의 인증절차가 없으므로 공격 수행이 용이
+쿼리타입을 any나 txt로 하여 response size 증폭. 다수의 좀비PC를 동원하지 않더라도 대량의 공격패킷을 만들어 낼 수 있어 효율이 높음
+공격단계 :
+1.공격자는 손상된 Endpoint를 사용하여 UDP패킷과 스푸핑된IP주소와 DNS재귀자에게 전송한다. 패킷에 포함된 스푸핑된 주소는 victim의 실제 IP주소
+2.모든 UDP패킷이 각각 DNS확인자에 요청을하며, 대개는 "ANY" 인수를 전달하여 가능한 한 가장 큰 응답을 수신
+3.DNS확인자는 요청을 수신하면, 응답을 통해 도움을 주고자하므로 스푸핑된IP주소로 많은 양의 응답을 보냄
+4.목표 victim의 IP주소는 이 응답을 수신하게 되고 주변 네트워크 인프라가 이러한 트래픽의 폭주로 인해 압도되어 서비스거부가 발생
+
+
