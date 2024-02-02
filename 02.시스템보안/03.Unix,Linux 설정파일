@@ -73,3 +73,22 @@ crontab -u sis -e --sis계정의 crontab 편집
 일종의 가상 파일시스템으로 동작중인 프로세스의 상태정보,하드웨어정보,시스템정보 등을 알 수 있음
 /proc엔 현재 실행중인 PID와 같은 이름의 폴더들이 생성됨
 ps라는 명령어를 통해 이 폴더의 내용을 조회해서 보여줌
+
+/httpd.conf(/etc/conf/httpd/httpd.conf)
+리눅스 Apache웹서버의 메인 설정파일
+LimitRequestBody
+Directoryindex
+KeepAlive On
+options indexes followsymlinks??
+
+/named.conf(/var/named)
+리눅스 DNS서버 프로그램인 bind(데몬명 named) 메인 설정파일
+options{
+forward only;
+allow-query {192.168.10.1/24;};
+}
+
+
+
+
+
