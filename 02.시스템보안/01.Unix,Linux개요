@@ -129,7 +129,7 @@ Sticky-Bit : 일반 사용자들이 디렉터리에서 파일 및 디렉터리 �
                 stic(#find / -perm -1000 -print)
 
 #chmod 4700 /etc/passwd --파일이나 디렉터리의 접근권한을 변경
-#umask 333 /etc/passwd --파일 생성 시 접근권한에 영향을 미침  (초기 생성시 권한 : 파일:666/디렉터리:777)
+#umask 333 /etc/passwd --파일 생성 시 접근권한에 영향을 미침  (초기 생성시 권한 : 파일:666=rw-rw-rw-/디렉터리:777=rwxrwxrwx)
 #chown root /etc/passwd --파일의 소유주를 변경
 #chgrp tree /etc/passwd --파일의 소유그룹을 변경
 
