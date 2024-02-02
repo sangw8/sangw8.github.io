@@ -1,0 +1,68 @@
+<패스워드 암호화>
+Router#configure terminal(conf t)
+Router(config)#service password-encryption   --패스워드 암호화 활성화(모든 aux,telnet,console 암호설정)
+Router(config)#enable secret  --패스워드를 암호화해서 저장
+Router(config)#enable password  --패스워드를 평문으로 저장
+
+<algisa계정 패스워드 설정>
+#username algisa password 0 network
+
+<privilege모드로 변화시 패스워드 설정>
+#enable password qwer123
+
+<Telnet 암호 설정> 
+#line vty 0 4        --4명만 동시접속 가능. (vty=telnet. con=콘솔. aux=aux port)
+(vty)#exec-timeout 3 30    --텔넷 명령어 3분 30초 초과시 세션 자동 종료
+(vty)#password sfdffdsf
+(vty)#login
+
+<virtual terminal 192.89.55.0/24에서만 접속이 허용하도록 함 ACL>
+#access-list 12(id) permit 192.89.55.0 0.0.0.255
+#line vty 0 4
+(vty)#access-class 12 in
+
+<hostname 변경>
+#hostname 호스트이름
+
+<시간 세팅>
+#clock set 15:45:18 1 August 2004(시간 일 월 년)
+
+<라우터 방금 내린 명령어 10개 기억>
+#terminal history size 10
+
+<eth0 ip지우고 ip 2개 추가>
+#no ip address
+#ip address 192.168.0.1
+#ip address 192.168.0.2 secondary
+
+<라우터 웹 활성화 방지>
+#no ip http server
+
+<시리얼 0 클럭속도 56k>
+#clock rate 56000
+
+<라우터 로그인 시 banner 설정>
+#banner motd#
+welcome to byc#
+
+<Serial 0의 인터페이스 보이기>
+#show interface serial 0
+
+<라우터 시간>
+#show clock
+
+<interface 정보>
+#show interface
+
+<버전 보기>
+#show version
+
+<부하량 보이기>
+#show process cpu
+
+<라우터에 설정된 내용을 nvram에 저장>
+#copy running-config startup-config
+
+<초기화 및 재부팅>
+#erase startup-config
+#reload
