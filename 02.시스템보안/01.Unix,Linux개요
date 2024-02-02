@@ -138,6 +138,21 @@ Sticky-Bit : 일반 사용자들이 디렉터리에서 파일 및 디렉터리 �
 find [경로] [옵션] [대상]
 #find / -mtime -7  --최근 7일 내에 변경된 모든 파일을 검색하는 명령어
 #find / -user root -perm -4000  --사용자가 root이며 접근권한이 setuid로 설정된 모든 파일을 검색하는 명령어
+#find / -mtime -10 -print > /tmp/find.out  --최근 10일동안 변경된 파일을 찾아 /tmp/find.out에 저장하는 명령어
+#find / -type f -perm -4000 --전체 디렉터리에서 정규파일 중 Set-UID가 설정된 파일을 찾는 명령어
+#find [검색대상폴더] -type f -print | xargs grep "[검색 문자열]" --파일 내용에 문자열이 포함된 파일 찾기(하위폴더도 한번에 검색)
+
+[주요옵션]
+name [파일명] : 지정된 이름의 파일을 찾는다. 
+user [유저명] : user 소유의 파일을 찾는다.
+-type [bcdfls] : 지정된 형식의 파일을 찾는다 ­ b : 블록파일 ­ c : 문자 ­ d : 디렉터리 ­ f : 파일 ­ l : 링크파일 ­ s : 소켓  p : 파이프
+-size [+/-]숫자[bckw] : 지정된 크기의 파일을 찾는다  ­ +n : n보다 크다 ­ -n : n보다 작다 ­ n : n이다 ­ b : 512-byte ­ c : byte ­ k : kilobytes ­ w : 2-byte
+-mtime [+/-]숫자  ­ +n : n일 전에 수정된 파일을 찾는다.(n일 또는 그보다 더 오래 전의 파일) ­ -n : n일 동안 수정된 파일을 찾는다.(오늘 부터 n일 전까지의 파일)
+ mtime(수정)/atime(접근)/ctime(생성)
+-inum number : 지정한 아이노드 번호와 파일을 찾는다.
+-print : 표준출력으로 검색된 파일명을 출력한다.
+-exec command { } \; : 찾은 각 파일에 대해 지정된 명령을 실행한다.
+-ok command { } \; : 실행 여부를 사용자에게 확인한 후 명령을 실행한다.
 
 
 <tcp dump>
