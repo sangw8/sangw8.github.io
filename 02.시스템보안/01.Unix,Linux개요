@@ -136,8 +136,12 @@ Sticky-Bit : 일반 사용자들이 디렉터리에서 파일 및 디렉터리 �
 
 <파일 및 폴더 검색>
 find [경로] [옵션] [대상]
+#find / -mtime -7  --최근 7일 내에 변경된 모든 파일을 검색하는 명령어
+#find / -user root -perm -4000  --사용자가 root이며 접근권한이 setuid로 설정된 모든 파일을 검색하는 명령어
 
 
+<tcp dump>
+tcpdump -l eth0 -n dst host 192.168.256.3 src host 192.168.10.48   --192.168.256.3에서 192.168.10.48로부터 이상(anormaly) 트래픽이 탐지되었다. tcpdump명령을 통해 인터페이스 eth0을 통해 192.168.253.3
 
 <계정 보안>
 /etc/passwd 파일)
