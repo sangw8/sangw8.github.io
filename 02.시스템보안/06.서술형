@@ -119,4 +119,17 @@ UDP프로토콜의 신속성, 대량성. UDP는 별도의 인증절차가 없으
 3.DNS확인자는 요청을 수신하면, 응답을 통해 도움을 주고자하므로 스푸핑된IP주소로 많은 양의 응답을 보냄
 4.목표 victim의 IP주소는 이 응답을 수신하게 되고 주변 네트워크 인프라가 이러한 트래픽의 폭주로 인해 압도되어 서비스거부가 발생
 
-
+php(Server side script)
+system(), exec() 같은 운영체제의 명령어를 실행 할 수 있는 함수가 실행되는 페이지를 include 한 경우 명령어 삽입을 통한 공격이 가능하다. 
+이러한 취약점을 방지하기 위해서
+코드에 (A:include/require) 문이 존재하는 검증 하고
+PHP의 경우 외부 사이트의 파일을 삽입 차단하기 위해 설정 파일인 (B:php.ini)의
+allow_url_fopen=(C:off)로 변경한다.
+-PHP의 경우 include나 require함수를 이용하여 외부파일을 본문에 포함시킬 수 있다
+-이렇게 include되는 파일 내부에 system()처럼 운영체제 명령어 실행이 가능한 함수 메소드가 있을경우
+ 원격으로 OS명령어를 수행할 수 있고, 대부분의 WebShell은 이런 기능을 포함하고 있다
+-PHP파일과 동일한 로컬 서버에 있는 파일을 include시키는 공격은 LFI(Local File Inclusion)라 하고
+ 외부의 파일을 include시키는 경우 RFI(Remote File Inclusion)이라고 한다
+-이런 파일 포함 공격을 방지하기 위해서는 PHP 환경설정 파일인 php.ini에서 Safe_mode = On하여
+ shell_exe(), system() 함수 등을 제한하거나, allow_url_fopen이나 allow_url_include를 off로 설정하여
+ 외부 파일을 php본문에 include하지 못하도록 설정한다.
