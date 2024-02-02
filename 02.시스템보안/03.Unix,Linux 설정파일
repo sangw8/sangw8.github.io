@@ -75,6 +75,7 @@ crontab -u sis -e --sis계정의 crontab 편집
 ps라는 명령어를 통해 이 폴더의 내용을 조회해서 보여줌
 
 /httpd.conf(/etc/conf/httpd/httpd.conf)
+           (/[Apache_home]/conf/httpd.conf)
 리눅스 Apache웹서버의 메인 설정파일
 LimitRequestBody
 Directoryindex
