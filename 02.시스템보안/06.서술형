@@ -72,3 +72,19 @@ POST Request에 대하여 컨텐츠 길이(Content-Length)가 10000000이라는 
              -에뮬레이터, 루팅된 폰에서 동작안함
              -침해가 가능한 기종에서만 동작함
              -침해대상 정보가 있는 환경에서만 동작
+
+
+백업용 쉘 스크립트 파일과 백업 결과 파일
+[백업용 쉘 스크립트 파일(backup.sh)]
+#!/bin/sh
+today = $(date +%Y%m%d%H%M%S)
+tar -cvzf /data/backup/etc_$dat.tgz /etc/*
+tar -cvzf /data/backup/home_$dat.tgz /home/*
+[백업 결과 파일 목록]
+ㅡrwㅡrㅡㅡrㅡㅡ1 root root 101853308 2021-03-10 13:39 etc_202103101339.tgz
+ㅡrwㅡrㅡㅡrㅡㅡ1 root root 40736 2021-03-10 13:39 home_202103101339.tgz
+보안상 문제 : 백업파일 접근권한이 644로 생성되어 일반 사용자가 생성된 백업 파일에 접근하여 읽을 수 있는 문제가 있다
+개선사항 : tar 명령이전(백업 파일을 생성하기 전)에 umask 066 설정 후 tar 명령이 끝난 후 umask 022로 원복
+operater사용자만 백업용 쉘 스크립트파일(/usr/local/bin/backup.sh)을 사용하도록 만드는 명령어 :
+ $chown operator /usr/local/bin/backup.sh  --쉘스크립트 파일의 소유자를 operator로 변경
+ $chmod 700 /usr/local/bin/backup.sh       --쉘스크립트 파일의 접근권한을 소유자만 접근가능하도록 700으로 변경
