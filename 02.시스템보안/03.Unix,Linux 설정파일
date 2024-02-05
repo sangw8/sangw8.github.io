@@ -105,10 +105,19 @@ options indexes followsymlinks??
 
 ●/named.conf(/var/named)
 리눅스 DNS서버 프로그램인 bind(데몬명 named) 메인 설정파일
+글로벌 설정은 named.conf에서 하고 세부설정은 각 도메인별 zone파일에서 함
 options{
-forward only;
-allow-query {192.168.10.1/24;};
+directory "/var/named";      -- zone파일이 위치하는 디렉터리명
+forwarders {8.8.8.8;};       -- 도메인에 대한 질의를 다른 서버로 넘김 {DNS주소; DNS주소; ...;};
+forward only;                -- only:다른서버가 응답없을 경우 자신도 응답없음 / first:다른서버에서 응답없으면 자신이 응답     
+datasize 1024M;              -- 캐시메모리 최대용량을 제한
+allow-query {192.168.10.1/24;};  --네임서버에 질의할 수 있는 호스트를 지정
 }
+>>서버로 들어온 도메인 질의요청은 8.8.8.8 IP주소를 가진 호스트로 넘기고, 해당서버에서 응답이 없어도 질의에 응답하지 않는다
+>>DNS관련정보 캐싱을 하는데 사용하는 메모리를 1024M로 제한한다
+>>네임서버에 질의할 수 있는 호스트를 192.168.64.0 네트워크 주소대역에 속한 호스트만 질의할 수 있게 설정한다
+
+
 
 
 
