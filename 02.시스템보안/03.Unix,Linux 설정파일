@@ -78,7 +78,6 @@ ps라는 명령어를 통해 이 폴더의 내용을 조회해서 보여줌
 
 ●/httpd.conf(/etc/conf/httpd/httpd.conf)(/[Apache_home]/conf/httpd.conf)
 리눅스 Apache웹서버의 메인 설정파일
-
 (기본설정)
 Listen 1120 : 사용할 포트를 지정
 ServerName webadmin.example.com:1120: 서버의 도메인을 입력
@@ -100,8 +99,13 @@ KeepAliveTimeout 100       : 언제까지 접속을 유지할지(초단위)
 -KeepAlive를 사용하면 더 빠르지만, 동시접속량은 줄어들 수 있음
 (기타)
 LimitRequestBody : 전송가능한 최대사이즈를 제한
-
-options indexes followsymlinks??
+indexes : 디렉터리 검색 기능 제거(Otions지시자 - indexes 옵션 제거 후 저장)
+<Directory />
+Options indexes followsymlinks )
+AllowOverride None
+Order allow, deny
+Allow from all
+</Directory>
 
 ●/named.conf(/var/named)
 리눅스 DNS서버 프로그램인 bind(데몬명 named) 메인 설정파일
