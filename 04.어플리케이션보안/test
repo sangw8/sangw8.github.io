@@ -6,3 +6,12 @@ snmp
 manager(162)-----agent(161)
              >><< get request/response
       trap  <<<<< 
+snmp 최소 일치조건
+snmp버전
+community string
+PDU(protocol data unit)
+  pdu타입
+  get request/get next request/set request/get response
+
+
+ 
