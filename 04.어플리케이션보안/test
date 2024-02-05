@@ -1,1 +1,8 @@
+ftp
+20 : 제어포트
+21 : 데이터전송용
 
+snmp
+manager(162)-----agent(161)
+             >><< get request/response
+      trap  <<<<< 
