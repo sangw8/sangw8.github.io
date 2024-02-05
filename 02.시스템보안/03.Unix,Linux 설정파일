@@ -78,9 +78,29 @@ ps라는 명령어를 통해 이 폴더의 내용을 조회해서 보여줌
 
 ●/httpd.conf(/etc/conf/httpd/httpd.conf)(/[Apache_home]/conf/httpd.conf)
 리눅스 Apache웹서버의 메인 설정파일
-LimitRequestBody
-Directoryindex
-KeepAlive On
+
+(기본설정)
+Listen 1120 : 사용할 포트를 지정
+ServerName webadmin.example.com:1120: 서버의 도메인을 입력
+DocumentRoot "/var/www/html/webadmin": 웹 문서가 위치하는 디렉터리를 지정
+ServerAdmin webadmin@example.com : 서버 관리자 이메일을 입력
+Directoryindex index.php index.html index.htm: 클라이언트가 디렉터리를 요청할 때 먼저 읽히는 파일들을 지정
+(접근제어)
+<Directory "/www/ihd/admin">
+ Order Deny,Allow             -- 화이트리스트(Deny와 Allow 순서를 정함)/블랙리스트(Allow,Deny)
+ Deny from All                -- 최종적으로 읽히는 정책이 동작
+ Allow from 192.168.2.0/24    -- 기본적으로 다 막고, 192.168.2 대역만 오픈
+</Directory>
+(접속유지)
+KeepAlive On             
+MaxKeepAliveRequests 100   : 클라이언트와 서버프로세스 간에 연결을 지속시키는 동안에 허용할 최대 요청 건수를 지정(요청초과시 연결종료)
+KeepAliveTimeout 100       : 언제까지 접속을 유지할지(초단위)
+-HTTP는 기본적으로 stateless프로토콜로, 페이지를 로드할 때마다 새로 접속을 수립
+-KeepAlive는 이러한 특성 때문에 발생하는 부하와 속도저하를 줄이고자 일정시간동안 접속유지
+-KeepAlive를 사용하면 더 빠르지만, 동시접속량은 줄어들 수 있음
+(기타)
+LimitRequestBody : 전송가능한 최대사이즈를 제한
+
 options indexes followsymlinks??
 
 ●/named.conf(/var/named)
