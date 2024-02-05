@@ -3,9 +3,9 @@ ftp
 21 : 데이터전송용
 
 snmp
-manager(162)-----agent(161)
-             >><< get request/response
-      trap  <<<<< 
+manager(162)------------------------agent(161)
+                        >><< get request/response==polling
+trap(event reporting)  <<<<< 
 snmp 최소 일치조건
 snmp버전
 community string
