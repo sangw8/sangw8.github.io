@@ -80,10 +80,10 @@ ps라는 명령어를 통해 이 폴더의 내용을 조회해서 보여줌
 리눅스 Apache웹서버의 메인 설정파일
 (기본설정)
 Listen 1120 : 사용할 포트를 지정
-ServerName webadmin.example.com:1120: 서버의 도메인을 입력
-DocumentRoot "/var/www/html/webadmin": 웹 문서가 위치하는 디렉터리를 지정
-ServerAdmin webadmin@example.com : 서버 관리자 이메일을 입력
-Directoryindex index.php index.html index.htm: 클라이언트가 디렉터리를 요청할 때 먼저 읽히는 파일들을 지정
+ServerName webadmin.example.com:1120     -- 서버의 도메인을 입력
+DocumentRoot "/var/www/html/webadmin"    -- 웹 문서가 위치하는 디렉터리를 지정
+ServerAdmin webadmin@example.com         -- 서버 관리자 이메일을 입력
+Directoryindex index.php index.html index.htm  -- 클라이언트가 디렉터리를 요청할 때 먼저 읽히는 파일들을 지정
 (접근제어)
 <Directory "/www/ihd/admin">
  Order Deny,Allow             -- 화이트리스트(Deny와 Allow 순서를 정함)/블랙리스트(Allow,Deny)
