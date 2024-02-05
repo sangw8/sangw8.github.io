@@ -12,6 +12,8 @@ community string
 PDU(protocol data unit)
   pdu타입
   get request/get next request/set request/get response
-
-
+MIB : 관리되어야 할 객체 집합소(트리구조)
+SMI : mib를 정의하기 위한 일반적 구조 (asn.1언어사용)
+community string : snmp데몬(manager)와 클라이언트(agent)가 데이터를 교환하기 전에 인증하는 일종의 패스워드
+                   snmp에서는 RO(read only) 와 RW(read write) 모드 제공
  
