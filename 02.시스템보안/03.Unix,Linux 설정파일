@@ -81,6 +81,7 @@ ServerName webadmin.example.com:1120     -- 서버의 도메인을 입력
 DocumentRoot "/var/www/html/webadmin"    -- 웹 문서가 위치하는 디렉터리를 지정
 ServerAdmin webadmin@example.com         -- 서버 관리자 이메일을 입력
 Directoryindex index.php index.html index.htm  -- 클라이언트가 디렉터리를 요청할 때 먼저 읽히는 파일들을 지정
+Customlog /www/logs/access_log common        -- Apache기본로그포맷을 사용하고 /www/logs/access_log 경로에 저장
 (접근제어)
 <Directory "/www/ihd/admin">
  Order Deny,Allow             -- 화이트리스트(Deny와 Allow 순서를 정함)/블랙리스트(Allow,Deny)
