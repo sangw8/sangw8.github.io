@@ -1,6 +1,6 @@
 ●xinetd
 다른 데몬의 실행을 관장하는 슈퍼데몬
- *daemon=resident program : 컴퓨터 시스템의 운영에 관련된 작업을 후선(background) 상태로 동작하면서 실행하는 프로그램
+ *daemon=resident program : RAM(주기억장치)에 상주하는 프로그램.컴퓨터 시스템의 운영에 관련된 작업을 후선(background) 상태로 동작하면서 실행하는 프로그램
 과거 슈퍼데몬으로 사용되었던 inetd를 대체하기 위해 등장
 <xinetd.conf>
 defaults
