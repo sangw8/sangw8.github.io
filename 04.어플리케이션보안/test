@@ -1,8 +1,8 @@
-ftp
+FTP>
 20 : 제어포트
 21 : 데이터전송용
 
-snmp
+SNMP>
 manager(162)------------------------agent(161)
                         >><< get request/response==polling
 trap(event reporting)  <<<<< 
