@@ -51,10 +51,10 @@ established ------ACK------->  established   //ack가 backlogqueue sync지움. t
 4-way-handshake 협상(세션 종료)
 Client                         Server
 established                    established
-fin-wait-1  -------FIN-------> close-wait
-fin-wait-2  <-----FIN+ACK----  close-wait
-time-wait   <------FIN-------- last-ack
-time-wait   ------FIN+ACK----> closed
+fin-wait-1  -------FIN+ACK---> close-wait
+fin-wait-2  <---------ACK----  close-wait
+time-wait   <------FIN+ACK---- last-ack
+time-wait   ------ACK--------> closed
 closed
 
 Anonymous(익명) FTP
