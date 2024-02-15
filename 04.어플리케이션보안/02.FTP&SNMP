@@ -83,11 +83,11 @@ outgoing real 로그인한id 서비스방법 인증방법 전송상태 성공
 ●SNMP (Simple Network Management Protocol)
 (Manager's 162 / Agent's 161)
 
-manager(162)------------------------------------agent(161)
-                         >><< get request/response==polling
-trap(event reporting)    <<<< 
+manager(162)------------------------------------------------------------------------------agent(161)
+                         <<--->>   get-request/get-next-request/set-request/get-response  -- polling
+trap(event reporting)    <<----- 
 
-snmp 최소일치조건
+<SNMP 최소일치조건>
 -snmp version
 -community string : snmp데몬(manager)와 클라이언트(agent)가 데이터를 교환하기 전에 인증하는 일종의 패스워드
                     snmp에서는 RO(read only) 와 RW(read write) 모드 제공
