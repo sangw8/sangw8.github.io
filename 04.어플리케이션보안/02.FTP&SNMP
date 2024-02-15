@@ -82,9 +82,12 @@ outgoing real 로그인한id 서비스방법 인증방법 전송상태 성공
 
 ●SNMP (Simple Network Management Protocol)
 (Manager's 162 / Agent's 161)
+Manager가 Agent로 Request하는 포트번호 : UDP 161
+Manager가 요구하지 않더라도 Agent에 의해 자의적으로 송신되는 메시지로 시스템이 다운되거나, 새로 부팅될 때 Manager에게 이 사실을 알림 : Trap or Event Reporting
+Agent가 Manager로 주기적으로 보고하는 포트번호 : UDP 162
 
-manager(162)------------------------------------------------------------------------------agent(161)
-                         <<--->>   get-request/get-next-request/set-request/get-response  -- polling
+Manager(162)------------------------------------------------------------------------------Agent(161)
+                         <<--->>   get-request/get-next-request/set-request/get-response(polling)
 trap(event reporting)    <<----- 
 
 네트워크 관리를 위해 시스템이나 네트워크 장비를 설정하고 모니터링할 수 있는 프로토콜
@@ -118,4 +121,6 @@ msgAuthoritativeEngineTime       재전송 공격 방지
 msgUserName                      메시지 위·변조 방지. 메시지 인증
 msgAuthenticationParameters      메시지 위·변조 방지. 메시지 인증
 msgPrivacyParameters             기밀성, 스니핑 방지, 메세지 암호화(DES-CBC 지원)
+
+
 
