@@ -3,9 +3,9 @@ FTP>
 21 : 데이터전송용
 
 SNMP>
-manager(162)------------------------agent(161)
-                        >><< get request/response==polling
-trap(event reporting)   <<<< 
+manager(162)------------------------------------agent(161)
+                         >><< get request/response==polling
+trap(event reporting)    <<<< 
 snmp 최소 일치조건
 snmp버전
 community string
