@@ -47,7 +47,7 @@ closed                         closed
 closed                         listen
 syn-sent    ------SYN------->  syn-received                           
 established <---SYN+ACK------  syn-received
-established ------ACK------->  established
+established ------ACK------->  established   //ack가 backlogqueue sync지움. tcp syn flooding은 ack를 보내지않고 계속 syn패킷만 유발시켜 백로그큐 가득 채워 서비스 마비
 4-way-handshake 협상(세션 종료)
 Client                         Server
 established                    established
