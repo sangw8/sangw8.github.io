@@ -101,9 +101,16 @@ trap(event reporting)    <<-----
 -MIB : 관리되어야 할 객체 집합소(트리구조)
 -SMI : MIB를 정의하기 위한 일반적 구조 (asn.1언어사용)
 
-<SNMPv3>
-SNMPv1과 v2는 보안성을 고려하지 않고 설계됨
+<SNMPv3> 
+Model     Level        Authentication     Encryption
+v1      인증x,암호화x   community string       no         
+v2      인증x,암호화x   community string       no
+v3      인증x,암호화x   username               no
+        인증o,암호화x   HMAC MD5 or SHA        no
+        인증o,암호화o   HMAC MD5 or SHA        DES
+SNMPv1과v2는 보안성을 고려하지 않고 설계됨 //인증&암호화 지원X
 SNMPv3는 다양한 공격 위협에 대응하기 위해 보안매개변수(msgSecurityParameter)를 사용
+
 보안매개변수 옵션
 msgAuthoritativeEngineID         재전송 공격 방지
 msgAuthoritativeEngineBoots      재전송 공격 방지
