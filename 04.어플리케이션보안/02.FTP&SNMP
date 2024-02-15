@@ -1,8 +1,81 @@
-FTP>
-20 : 제어포트
-21 : 데이터전송용
+●FTP (File Transfer Protocol)
+(21 : 통신제어.Command / 20 : 데이터전송.Data)
+-FTP동작모드 : Active모드
+FTP Client                FTP Server
+5150(21) ---접속시도(로그인)---> 21            "Port 5151"        //클라이언트는 서버의 21번 포트로 접속.자신이 사용할 두번째 포트를 서버 알림
+5150(21) <---------OK---------  21               "OK"            //서버는 클라이언트 요청에 응답
+5151(20) <-------접속시도------  20            DATA CHANNEL       //서버의 20번(Data)포트는 클라이언트가 알려준 두번째 포트로 접속시도
+5151(20) ----------OK---------> 20               "OK"            //클라이언트가 서버의 요청에 응답
+*클라이언트에서 서버의 파일이 보이지 않을 때 : 
+ 서버측 20번 포트와의 통신이 차단되어 파일리스트를 볼 수 없음 ---> 클라이언트에서 방화벽으로 포트가 막혀있을 가능성이 크므로 방화벽을 허용
 
-SNMP>
+-FTP동작모드 : Passive(수동)모드 : 서버에서 데이터전송을 위해 서버의 1024포트 이상을 사용. 
+FTP Client                FTP Server
+5150(21)  ---접속시도(로그인)---> 21           "PASV"             //클라이언트는 서버의 21번 포트로 접속
+5150(21)  <---------OK---------  21          "OK 3267"           //서버는 통신에 사용할 두번째 포트를 클라이언트에 알림
+5151(20)  -------접속시도------> 3267         DATA CHANNEL        //클라이언트는 다른포트를 열어 서버가 알려준 포트로 접속시도    
+5151(20)  <----------OK-------- 3267           "OK"              //서버가 클라이언트 요청에 응답
+
+-ftp로 연결할 때 접근이 통제되는 파일
+ /etc/ftpusers(/etc/vsftpd/ftpusers) : FTP 접속제한계정 등록(이 파일 안에 ID가 존재 시 FTP접속 거부)
+ /etc/hosts.deny                     : 특정한 IP의 접근제한
+ /etc/hosts.allow                    : 특정한 IP의 접근허용
+
+*FTP 명령어
+ ABOR : 현재 전송 중인 파일 전송 중단
+ CWD : 작업 디렉터리 변경
+ DELE : 원격지 파일 삭제
+ LIST : 원격지 파일 목록
+ MDTM : 파일의 수정 시간 확인
+ MKD : 원격 디렉토리 생성
+ MODE : 전송 모드 변경
+ NLST : 원격 디렉터리 목록
+ PASV : Passive모드로 변환
+ PORT : data 포트 열기
+ PWD : 작업 디렉토리 표시
+ QUIT : 연결 종료
+ RETR : 원격지 파일 가져오기
+ RMD : 원격지 디렉터리 제거
+ SIZE : 파일 사이즈 리턴
+ STOR : 원격지 파일 저장
+ USER : 사용자명 전송
+
+*참조 
+3-way-handshake 협상(연결 수립)
+Client                         Server
+closed                         closed
+closed                         listen
+syn-sent    ------SYN------->  syn-received                           
+established <---SYN+ACK------  syn-received
+established ------ACK------->  established
+4-way-handshake 협상(세션 종료)
+Client                         Server
+established                    established
+fin-wait-1  -------FIN-------> close-wait
+fin-wait-2  <-----FIN+ACK----  close-wait
+time-wait   <------FIN-------- last-ack
+time-wait   ------FIN+ACK----> closed
+closed
+
+
+Anonymous(익명) FTP
+공개된 FTP서버라고 하며, 그 호스트에 대해서는 누구든지 계정 없이도 anonymous 또는 ftp라는 로그인명으로 ftp를 실행할 수 있음
+
+FTP Bounce Attack
+FTP서버가 클라이언트에 데이터를 전송할 때 프로토콜 확인 과정이 없음(목적지가 어디인지 검사하지 않는) 설계상의 문제점을 이용한 공격.
+제어명령전달포트와 데이터전송포트를 다르게 사용하고 데이터포트로 전달될 때 목적지를 확인하지 않는 FTP설계의 구조적 문제점을 이용하는 공격
+익명FTP서버를 이용해 공격대상의 네트워크를 스캔하고 PORT 명령어를 이용하여 FTP서버로 하여금 공격자가 원하는 곳으로 데이터를 전송하게 됨(호스트를 스캔하며 FTP서버를 통해 임의의 네트워크 접속을 릴레이 함)
+                                            (목적지검사X)              (보안정책에 따라 강제종료)
+hacker ---1.접속:조작된 인사서버 IP,Port ------> FTP서버 ------2.Sync--------> 인사서버
+       <----4.RST 즉 인사서버 Port확인---------         <-----3.RST----------
+                                                                 
+
+TFTP Attack
+주로 부팅이미지를 클라이언트에게 전달할 목적으로 UDP 69번포트를 사용하여 인증과정 없이(로그인절차X,파일디렉터리를 볼 수 없음) 파일을 전송하는 서비스를 대상으로 하는 공격
+
+
+●SNMP (Simple Network Management Protocol)
+(Manager's 162 / Agent's 161)
 manager(162)------------------------------------agent(161)
                          >><< get request/response==polling
 trap(event reporting)    <<<< 
