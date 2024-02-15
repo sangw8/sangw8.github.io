@@ -87,6 +87,10 @@ manager(162)--------------------------------------------------------------------
                          <<--->>   get-request/get-next-request/set-request/get-response  -- polling
 trap(event reporting)    <<----- 
 
+네트워크 관리를 위해 시스템이나 네트워크 장비를 설정하고 모니터링할 수 있는 프로토콜
+라우터, 스위치, 서버, 워크스테이션, 프린터, 모뎀 랙 등 네트워크 장비에서 지원
+관리의 편의성을 가져다 주지만 보안성이 취약하여 주의가 요구됨
+
 <SNMP 최소일치조건>
 -snmp version
 -community string : snmp데몬(manager)와 클라이언트(agent)가 데이터를 교환하기 전에 인증하는 일종의 패스워드
@@ -96,3 +100,15 @@ trap(event reporting)    <<-----
   get request/get next request/set request/get response
 -MIB : 관리되어야 할 객체 집합소(트리구조)
 -SMI : MIB를 정의하기 위한 일반적 구조 (asn.1언어사용)
+
+<SNMPv3>
+SNMPv1과 v2는 보안성을 고려하지 않고 설계됨
+SNMPv3는 다양한 공격 위협에 대응하기 위해 보안매개변수(msgSecurityParameter)를 사용
+보안매개변수 옵션
+msgAuthoritativeEngineID         재전송 공격 방지
+msgAuthoritativeEngineBoots      재전송 공격 방지
+msgAuthoritativeEngineTime       재전송 공격 방지
+msgUserName                      메시지 위·변조 방지. 메시지 인증
+msgAuthenticationParameters      메시지 위·변조 방지. 메시지 인증
+msgPrivacyParameters             기밀성, 스니핑 방지, 메세지 암호화(DES-CBC 지원)
+
