@@ -53,6 +53,9 @@
 #sudo -u algisa /batch/batch.sh --명령어를 실행할 때 algisa의 권한으로 실행. -u 생략시 root권한으로 실행
 #systl/ndd
 #./pingmaster.exe --상대경로 pingmaster 실행. 절대경로(#/root/pingmaster.exe)로 입력해도 동일하게 실행
+#run ./PingMaster.exe
+ ps |grep PingMaster.exe
+ kill ./PingMaster.exe
 
 <Unix|Linux 로그파일>
 - utmpx|utmp : 현재 사용자 정보를 기록(로그인,로그아웃 등 현재시스템 사용자의 계정정보)
